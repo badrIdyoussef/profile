@@ -1137,5 +1137,53 @@
     <script src="./js/validator.js"></script>
     <script src="./js/main.js"></script>
   <script defer src="js/j.js" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"8d69470a9ec2e1c1","version":"2024.10.1","r":1,"token":"94b99c0576dc45bf9d669fb5e9256829","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+   <!-- Firebase App (required) -->
+   <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js"></script>
+   <!-- Firebase Firestore -->
+   <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js"></script>
+   <!-- Firebase Realtime Database -->
+   <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js"></script>
+
+   <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore , collection ,addDoc} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDef4BdPq6yPEtxN6p5_W1vRWX5PHmXXpU",
+      authDomain: "locn-165b1.firebaseapp.com",
+      projectId: "locn-165b1",
+      storageBucket: "locn-165b1.appspot.com",
+      messagingSenderId: "49559146757",
+      appId: "1:49559146757:web:2b8de9791f3949f954e76c"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    // Initialize Firestore
+    const db = getFirestore(app);
+
+    
+    async function addUser(data) {
+
+    try {
+      const docRef = await addDoc(collection(db, "users"), data);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+
+  fetch('https://api.geoapify.com/v1/ipinfo?apiKey=c0fe9a53ae31451cb9f1ba618836b575')
+  .then(response => response.json())
+  .then(data => {
+    // You can now access the location data in the "data" object
+    addUser(data);   
+  })
+  // Call addUser function to add a user
+  </script>
+  </script>
 </body>
 </html>
